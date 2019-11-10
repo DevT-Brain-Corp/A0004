@@ -19,6 +19,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('profile', 'ProfileController');
-Route::resource('editProfile', 'EditProfileController');
+Route::resource('profile', 'ProfileController')->only(['show']);
+Route::resource('editProfile', 'EditProfileController')->only(['index', 'store']);
+Route::resource('/editPicture', 'EditPictureController')->only(['index', 'store']);
 });

@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <img src="{{$userData->pic}}" width="120px" height="120px" class="img-circle"/> <br>
-                    <button type="button" name="button" class="btn btn-success">Edit Foto</button> <br> <br>
+                    <a href="{{route('editPicture.index')}}"><button type="button" name="button" class="btn btn-success">Edit Foto</button></a>  <br> <br>
                     <form class="" action="{{route('editProfile.store')}}" method="post">
                       <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                       <div class="col-md-6">
