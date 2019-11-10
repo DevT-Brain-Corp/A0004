@@ -13,13 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h1>Niatnya disini ada foto</h1>
+                    <img src="{{$userData->pic}}" width="120px" height="120px" class="img-circle"/> <br>
                     Nama : {{$userData -> name}} <br>
                     Email : {{$userData -> email}} <br>
-                    Kota : {{$userData->profiles->city}} <br>
-                    Negara : {{$userData->profiles->country}} <br>
-                    Tentang : {{$userData->profiles->about}}<br>
-                    <a href="{{url('/editProfile')}}"><button type="button" name="button" class="btn btn-danger">Edit Profile</button></a>
+                    Kota : {{$userData->profile->city}} <br>
+                    Negara : {{$userData->profile->country}} <br>
+                    Tentang : {{$userData->profile->about}}<br>
+                    @if ($userData -> id == Auth::user()-> id)
+                    <a href="{{route('editProfile.index')}}"><button type="button" name="button" class="btn btn-danger">Edit Profile</button></a>
+                    @endif
                 </div>
             </div>
         </div>

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Users;
-use App\Profiles;
+use App\User;
+use App\Profile;
 class EditProfileController extends Controller
 {
     /**
@@ -15,7 +15,7 @@ class EditProfileController extends Controller
      */
     public function index()
     {
-        $userData = Users::with('profiles')->where('id', Auth::user()->id)->firstOrFail();
+        $userData = User::with('profile')->where('id', Auth::user()->id)->firstOrFail();
         return view('editProfile', compact('userData'));
     }
 
@@ -39,7 +39,7 @@ class EditProfileController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        Profiles::where('users_id', $user_id)->update($request->except('_token'));
+        Profile::where('user_id', $user_id)->update($request->except('_token'));
         return redirect()->route('profile.show', Auth::user()->slug);
     }
 

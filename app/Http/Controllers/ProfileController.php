@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-use App\Users;
-use App\Profiles;
+use App\User;
+use App\Profile;
 
 class ProfileController extends Controller
 {
@@ -50,7 +50,8 @@ class ProfileController extends Controller
      */
     public function show($slug)
     {
-      $userData = Users::with('profiles')->where('slug', $slug)->firstOrFail();
+      $userData = User::with('profile')->where('slug', $slug)->firstOrFail();
+
       return view('profile', compact('userData'));
     }
 

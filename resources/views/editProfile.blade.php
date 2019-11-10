@@ -13,19 +13,19 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h1>Niatnya disini ada foto</h1>
+                    <img src="{{$userData->pic}}" width="120px" height="120px" class="img-circle"/> <br>
                     <button type="button" name="button" class="btn btn-success">Edit Foto</button> <br> <br>
                     <form class="" action="{{route('editProfile.store')}}" method="post">
                       <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                       <div class="col-md-6">
                         <div class="input-group">
-                          Kota : <input type="text" class="form-control" name="city" value="{{$userData->profiles->city}}"> <br>
+                          Kota : <input type="text" class="form-control" name="city" value="{{$userData->profile->city}}"> <br>
                         </div>
                         <div class="input-group">
-                          Negara : <input type="text" class="form-control" name="country" value="{{$userData->profiles->country}}"> <br>
+                          Negara : <input type="text" class="form-control" name="country" value="{{$userData->profile->country}}"> <br>
                         </div>
                         <div class="input-group">
-                          Tentang : <textarea name="about" rows="8" cols="80" class="form-control" value="">{{$userData->profiles->about}}</textarea>
+                          Tentang : <textarea name="about" rows="8" cols="80" class="form-control" value="">{{$userData->profile->about}}</textarea>
                         </div>
                       </div>
 
