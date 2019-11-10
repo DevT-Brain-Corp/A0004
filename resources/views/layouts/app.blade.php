@@ -55,7 +55,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{{ url('/profile')}}/{{Auth::user()->slug}}">
+                                  <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->slug)}}">
                                       {{ __('My Profile') }}
                                   </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

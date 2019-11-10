@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
 use App\Users;
 use App\Profiles;
-
-class ProfileController extends Controller
+class EditProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-
+        $userData = Users::with('profiles')->where('id', Auth::user()->id)->firstOrFail();
+        return view('editProfile', compact('userData'));
     }
 
     /**
@@ -39,7 +37,10 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::user()->id;
+
+        Profiles::where('users_id', $user_id)->update($request->except('_token'));
+        return redirect()->route('profile.show', Auth::user()->slug);
     }
 
     /**
@@ -48,10 +49,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-      $userData = Users::with('profiles')->where('slug', $slug)->firstOrFail();
-      return view('profile', compact('userData'));
+
     }
 
     /**
