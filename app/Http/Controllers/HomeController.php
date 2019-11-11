@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
@@ -25,10 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $post = Post::orderby('id', 'DESC')->get();
-
-
-        return view('home', compact('post'));
+        $posts = Post::orderby('id', 'DESC')->get();
+        // $posts = [];
+        // foreach ($post as $p) {
+        //   $temp = [];
+        //   $temp['comments'] = Comment::where('post_id', $p->id)->get();
+        //   $temp['post'] = $p;
+        //   $posts[] = $temp;
+        // }
+        return view('home', compact('posts'));
     }
 
     public function store(Request $request)
@@ -41,6 +47,16 @@ class HomeController extends Controller
       $post->save();
 
       return back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $comment = new Comment;
+        $comment->comment = $request->comment;
+        $comment->user_id = Auth::user()->id;
+        $comment->post_id = $id;
+        $comment->save();
+        return back();
     }
 
 
