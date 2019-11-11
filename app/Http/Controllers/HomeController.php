@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Post;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $post = Post::orderby('id', 'DESC')->get();
+
+
+        return view('home', compact('post'));
     }
+
+    public function store(Request $request)
+    {
+      $post = new Post;
+      $post->user_id = Auth::user()->id;
+      $post->content = $request->content;
+      $post->status = 0;
+
+      $post->save();
+
+      return back();
+    }
+
+
 }

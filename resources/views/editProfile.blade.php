@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{route('home.index')}}">Beranda</a></li>
+    <li class="breadcrumb-item"><a href="{{route('profile.show', Auth::user()->slug)}}">{{$userData->name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
+  </ol>
+</nav>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -28,11 +36,6 @@
                           Tentang : <textarea name="about" rows="8" cols="80" class="form-control" value="">{{$userData->profile->about}}</textarea>
                         </div>
                       </div>
-
-
-
-
-
                       <button type="submit" class="btn btn-danger" onclick="sukses()">Simpan</button>
                     </form>
 

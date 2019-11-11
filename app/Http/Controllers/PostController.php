@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\User;
 
-class EditPictureController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,7 @@ class EditPictureController extends Controller
      */
     public function index()
     {
-        $userData = User::where('id', Auth::user()->id)->firstOrFail();
-
-        return view('editPicture', compact('userData'));
+        //
     }
 
     /**
@@ -38,30 +34,7 @@ class EditPictureController extends Controller
      */
     public function store(Request $request)
     {
-      $file = $request->file('pic');
-      if ($file != null) {
-        $filename = $file->getClientOriginalName();
-        $path = 'img/';
-        $file->move($path, $filename);
-
-
-        $folder = url("/img\/");
-        $location = $folder.$filename;
-
-        $user_id = Auth::user()->id;
-        User::where('id', $user_id)->update(['pic' =>  $location]);
-
-        return redirect()->route('profile.show', Auth::user()->slug);
-      } else {
-        if (Auth::user()->gender == "male") {
-          $defaultPic = url('/img/male.png');
-        } else {
-          $defaultPic = url('/img/female.png');
-        }
-        User::where('id',Auth::user()->id)->update(['pic' =>  $defaultPic]);
-        return redirect()->route('profile.show', Auth::user()->slug);
-      }
-
+        //
     }
 
     /**
